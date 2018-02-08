@@ -1,0 +1,26 @@
+service: collector-api
+
+provider:
+  name: aws
+  runtime: dotnetcore2.0
+  stage: dev
+  region: us-east-1
+
+package:
+  include: 
+
+functions:
+  get:
+    handler: Collector.Api::Collector.Api.Collector::Get
+    events:
+      - http:
+          path: v1/get
+          method: GET
+          private: false
+  save:
+    handler: Collector.Api::Collector.Api.Collector::Save
+    events:
+      - http: 
+          path: v1/save
+          method: POST
+          private: false
