@@ -21,7 +21,7 @@ namespace Oversight.Collector
             return new APIGatewayProxyResponse
             {
                 StatusCode = 200,
-                Headers = new Dictionary<string, string>() { {"Context-Type", "text/html"} },
+                Headers = new Dictionary<string, string>() { { "Context-Type", "text/html" } },
                 Body = "Hi"
             };
         }
@@ -41,15 +41,15 @@ namespace Oversight.Collector
             return new APIGatewayProxyResponse
             {
                 StatusCode = (int)System.Net.HttpStatusCode.OK,
-                Headers = new Dictionary<string, string>() { {"Content-Type", "text/html"} },
+                Headers = new Dictionary<string, string>() { { "Content-Type", "text/html" } },
                 Body = sb.ToString()
             };
         }
     }
 
-    public class CouchbaseLogRequest 
+    public class CouchbaseLogRequest
     {
-        public string ServerName {get; set;}
-        public string Status {get;set;}
+        public string ServerName { get; set; }
+        public string Status { get; set; }
     }
 }

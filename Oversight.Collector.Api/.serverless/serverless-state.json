@@ -11,6 +11,37 @@
       "name": "aws",
       "runtime": "dotnetcore2.0",
       "memorySize": 128,
+      "iamRoleStatements": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:Query",
+            "dynamodb:Scan",
+            "dynamodb:GetItem",
+            "dynamodb:PutItem",
+            "dynamodb:UpdateItem",
+            "dynamodb:DeleteItem"
+          ],
+          "Resource": [
+            {
+              "Fn::GetAtt": [
+                "RegisteredServicesDBTable",
+                "Arn"
+              ]
+            },
+            {
+              "Fn::GetAtt": [
+                "ServiceStatusDBTable",
+                "Arn"
+              ]
+            }
+          ]
+        }
+      ],
+      "environment": {
+        "REGISTEREDSERVICE_TABLE": "oversight-registeredservice-dev",
+        "SERVICESTATUS_TABLE": "oversight-registeredservice-dev"
+      },
       "versionFunctions": true,
       "remoteFunctionData": null,
       "compiledCloudFormationTemplate": {
@@ -93,6 +124,9 @@
                             "Fn::Sub": "arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/collector-api-dev-save:*:*"
                           }
                         ]
+                      },
+                      {
+                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][0]"
                       }
                     ]
                   }
@@ -119,7 +153,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/collector-api/dev/1518149188720-2018-02-09T04:06:28.720Z/Oversight-Collector-Api.zip"
+                "S3Key": "serverless/collector-api/dev/1518200090406-2018-02-09T18:14:50.406Z/Oversight-Collector-Api.zip"
               },
               "FunctionName": "collector-api-dev-get",
               "Handler": "Oversight.Collector.Api::Oversight.Collector.Api::Get",
@@ -131,21 +165,27 @@
                 ]
               },
               "Runtime": "dotnetcore2.0",
-              "Timeout": 6
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "REGISTEREDSERVICE_TABLE": "oversight-registeredservice-dev",
+                  "SERVICESTATUS_TABLE": "oversight-registeredservice-dev"
+                }
+              }
             },
             "DependsOn": [
               "GetLogGroup",
               "IamRoleLambdaExecution"
             ]
           },
-          "GetLambdaVersionXZjzw9Ls6j91oAtZdZTTiRWOlXwaJcl8G8hIizuM": {
+          "GetLambdaVersion42xrQVpalRRx6X111k7M4kCjoM6dlndHqS02XDFx22E": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetLambdaFunction"
               },
-              "CodeSha256": "1a3B/3l5hkhKM/RPqH2OSutDS92gDCx7z/HAHdypl3I="
+              "CodeSha256": "0cRMjdYw/3wT4yLEQ1GNboNy5udEcHz/3yxmTZkXpp8="
             }
           },
           "SaveLambdaFunction": {
@@ -155,7 +195,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/collector-api/dev/1518149188720-2018-02-09T04:06:28.720Z/Oversight-Collector-Api.zip"
+                "S3Key": "serverless/collector-api/dev/1518200090406-2018-02-09T18:14:50.406Z/Oversight-Collector-Api.zip"
               },
               "FunctionName": "collector-api-dev-save",
               "Handler": "Oversight.Collector.Api::Oversight.Collector.Api::Save",
@@ -167,21 +207,27 @@
                 ]
               },
               "Runtime": "dotnetcore2.0",
-              "Timeout": 6
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "REGISTEREDSERVICE_TABLE": "oversight-registeredservice-dev",
+                  "SERVICESTATUS_TABLE": "oversight-registeredservice-dev"
+                }
+              }
             },
             "DependsOn": [
               "SaveLogGroup",
               "IamRoleLambdaExecution"
             ]
           },
-          "SaveLambdaVersionfmFEzgpJnfAMctFIq9WOPxPwiW9wEWaxwzaemzlGfd4": {
+          "SaveLambdaVersionZqvSDkWv9VoZ28UQWQ0652iz9jheI8oSjIiCyeHu8Z0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SaveLambdaFunction"
               },
-              "CodeSha256": "1a3B/3l5hkhKM/RPqH2OSutDS92gDCx7z/HAHdypl3I="
+              "CodeSha256": "0cRMjdYw/3wT4yLEQ1GNboNy5udEcHz/3yxmTZkXpp8="
             }
           },
           "ApiGatewayRestApi": {
@@ -312,7 +358,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1518149188851": {
+          "ApiGatewayDeployment1518200090515": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -390,6 +436,50 @@
                 ]
               }
             }
+          },
+          "RegisteredServicesDBTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "id",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "id",
+                  "KeyType": "HASH"
+                }
+              ],
+              "ProvisionedThroughput": {
+                "ReadCapacityUnits": 1,
+                "WriteCapacityUnits": 1
+              },
+              "TableName": "oversight-registeredservice-dev"
+            }
+          },
+          "ServiceStatusDBTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "id",
+                  "AttributeType": "N"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "id",
+                  "KeyType": "HASH"
+                }
+              ],
+              "ProvisionedThroughput": {
+                "ReadCapacityUnits": 1,
+                "WriteCapacityUnits": 1
+              },
+              "TableName": "oversight-servicestatus-dev"
+            }
           }
         },
         "Outputs": {
@@ -401,13 +491,13 @@
           "GetLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetLambdaVersionXZjzw9Ls6j91oAtZdZTTiRWOlXwaJcl8G8hIizuM"
+              "Ref": "GetLambdaVersion42xrQVpalRRx6X111k7M4kCjoM6dlndHqS02XDFx22E"
             }
           },
           "SaveLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SaveLambdaVersionfmFEzgpJnfAMctFIq9WOPxPwiW9wEWaxwzaemzlGfd4"
+              "Ref": "SaveLambdaVersionZqvSDkWv9VoZ28UQWQ0652iz9jheI8oSjIiCyeHu8Z0"
             }
           },
           "ServiceEndpoint": {
@@ -445,6 +535,10 @@
       },
       "vpc": {}
     },
+    "custom": {
+      "registeredServicesTableName": "oversight-registeredservice-dev",
+      "serviceStatusTableName": "oversight-servicestatus-dev"
+    },
     "functions": {
       "get": {
         "handler": "Oversight.Collector.Api::Oversight.Collector.Api::Get",
@@ -478,10 +572,59 @@
         "package": {},
         "vpc": {}
       }
+    },
+    "resources": {
+      "Resources": {
+        "RegisteredServicesDBTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "id",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "id",
+                "KeyType": "HASH"
+              }
+            ],
+            "ProvisionedThroughput": {
+              "ReadCapacityUnits": 1,
+              "WriteCapacityUnits": 1
+            },
+            "TableName": "oversight-registeredservice-dev"
+          }
+        },
+        "ServiceStatusDBTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "id",
+                "AttributeType": "N"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "id",
+                "KeyType": "HASH"
+              }
+            ],
+            "ProvisionedThroughput": {
+              "ReadCapacityUnits": 1,
+              "WriteCapacityUnits": 1
+            },
+            "TableName": "oversight-servicestatus-dev"
+          }
+        }
+      },
+      "Outputs": {}
     }
   },
   "package": {
-    "artifactDirectoryName": "serverless/collector-api/dev/1518149188720-2018-02-09T04:06:28.720Z",
+    "artifactDirectoryName": "serverless/collector-api/dev/1518200090406-2018-02-09T18:14:50.406Z",
     "artifact": "Oversight-Collector-Api.zip"
   }
 }
