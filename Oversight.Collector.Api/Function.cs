@@ -13,7 +13,7 @@ namespace Oversight.Collector
     {
         public Api()
         {
-            LambdaLogger.Log("Starting up the Oversight Collector API");
+            LambdaLogger.Log("Starting up the Oversight Collector API\n");
         }
 
         public APIGatewayProxyResponse Get(APIGatewayProxyRequest request, ILambdaContext context)

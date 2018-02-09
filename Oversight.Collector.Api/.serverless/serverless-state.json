@@ -10,6 +10,7 @@
       "variableSyntax": "\\${([ ~:a-zA-Z0-9._'\",\\-\\/\\(\\)]+?)}",
       "name": "aws",
       "runtime": "dotnetcore2.0",
+      "memorySize": 128,
       "versionFunctions": true,
       "remoteFunctionData": null,
       "compiledCloudFormationTemplate": {
@@ -118,11 +119,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/collector-api/dev/1518148456247-2018-02-09T03:54:16.247Z/Oversight-Collector-Api.zip"
+                "S3Key": "serverless/collector-api/dev/1518149188720-2018-02-09T04:06:28.720Z/Oversight-Collector-Api.zip"
               },
               "FunctionName": "collector-api-dev-get",
               "Handler": "Oversight.Collector.Api::Oversight.Collector.Api::Get",
-              "MemorySize": 1024,
+              "MemorySize": 128,
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -137,14 +138,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "GetLambdaVersionp8vsM14EGphJcu01dRKIAA6xWUKg5e0rqgP1rsm6A": {
+          "GetLambdaVersionXZjzw9Ls6j91oAtZdZTTiRWOlXwaJcl8G8hIizuM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetLambdaFunction"
               },
-              "CodeSha256": "P4GtMw76Qe4mLAibSWKVpTbqDzqafBFHEt+cjW+EYKc="
+              "CodeSha256": "1a3B/3l5hkhKM/RPqH2OSutDS92gDCx7z/HAHdypl3I="
             }
           },
           "SaveLambdaFunction": {
@@ -154,11 +155,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/collector-api/dev/1518148456247-2018-02-09T03:54:16.247Z/Oversight-Collector-Api.zip"
+                "S3Key": "serverless/collector-api/dev/1518149188720-2018-02-09T04:06:28.720Z/Oversight-Collector-Api.zip"
               },
               "FunctionName": "collector-api-dev-save",
               "Handler": "Oversight.Collector.Api::Oversight.Collector.Api::Save",
-              "MemorySize": 1024,
+              "MemorySize": 128,
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -173,14 +174,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "SaveLambdaVersionhokdYOJ4zUOmOufGxBI2rofmOpmrf9aUjNoLzpAnS6c": {
+          "SaveLambdaVersionfmFEzgpJnfAMctFIq9WOPxPwiW9wEWaxwzaemzlGfd4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SaveLambdaFunction"
               },
-              "CodeSha256": "P4GtMw76Qe4mLAibSWKVpTbqDzqafBFHEt+cjW+EYKc="
+              "CodeSha256": "1a3B/3l5hkhKM/RPqH2OSutDS92gDCx7z/HAHdypl3I="
             }
           },
           "ApiGatewayRestApi": {
@@ -311,7 +312,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1518148456410": {
+          "ApiGatewayDeployment1518149188851": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -400,13 +401,13 @@
           "GetLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetLambdaVersionp8vsM14EGphJcu01dRKIAA6xWUKg5e0rqgP1rsm6A"
+              "Ref": "GetLambdaVersionXZjzw9Ls6j91oAtZdZTTiRWOlXwaJcl8G8hIizuM"
             }
           },
           "SaveLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SaveLambdaVersionhokdYOJ4zUOmOufGxBI2rofmOpmrf9aUjNoLzpAnS6c"
+              "Ref": "SaveLambdaVersionfmFEzgpJnfAMctFIq9WOPxPwiW9wEWaxwzaemzlGfd4"
             }
           },
           "ServiceEndpoint": {
@@ -480,7 +481,7 @@
     }
   },
   "package": {
-    "artifactDirectoryName": "serverless/collector-api/dev/1518148456247-2018-02-09T03:54:16.247Z",
+    "artifactDirectoryName": "serverless/collector-api/dev/1518149188720-2018-02-09T04:06:28.720Z",
     "artifact": "Oversight-Collector-Api.zip"
   }
 }
