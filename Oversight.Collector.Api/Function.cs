@@ -7,6 +7,7 @@ using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 using Newtonsoft.Json;
+using Oversight.Collector.Model;
 
 [assembly: LambdaSerializerAttribute(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
 namespace Oversight.Collector
@@ -34,7 +35,7 @@ namespace Oversight.Collector
         public async System.Threading.Tasks.Task<APIGatewayProxyResponse> Save(APIGatewayProxyRequest request, ILambdaContext context)
         {
             var serializer = new Newtonsoft.Json.JsonSerializer();
-            CouchbaseLogRequest data = JsonConvert.DeserializeObject<CouchbaseLogRequest>(request.Body);
+            OversightStatus data = JsonConvert.DeserializeObject<OversightStatus>(request.Body);
 
             context.Logger.LogLine("Loading table " + _serviceStatusTableName);
             AmazonDynamoDBClient client = new AmazonDynamoDBClient();
@@ -70,13 +71,5 @@ namespace Oversight.Collector
 
             
         }
-    }
-
-    public class CouchbaseLogRequest
-    {
-        public string ServerName { get; set; }
-        public string ServiceName { get; set; }
-        public string Status { get; set; }
-        public DateTime Timestamp {get; set;}
     }
 }

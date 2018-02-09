@@ -24,4 +24,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Oversight.Collector.Model\Oversight.Collector.Model.csproj" />
+  </ItemGroup>
 </Project>
