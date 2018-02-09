@@ -87,21 +87,22 @@
                     "dynamodb:GetItem",
                     "dynamodb:PutItem",
                     "dynamodb:UpdateItem",
-                    "dynamodb:DeleteItem"
+                    "dynamodb:DeleteItem",
+                    "dynamodb:DescribeTable"
                   ],
                   "Resource": [
-                    {
-                      "Fn::GetAtt": [
-                        "RegisteredServicesDBTable",
-                        "Arn"
-                      ]
-                    },
-                    {
-                      "Fn::GetAtt": [
-                        "ServiceStatusDBTable",
-                        "Arn"
-                      ]
-                    }
+                    "arn:aws:dynamodb:us-east-1:*:*"
+                  ]
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "ec2:CreateNetworkInterface",
+                    "ec2:DescribeNetworkInterfaces",
+                    "ec2:DeleteNetworkInterface"
+                  ],
+                  "Resource": [
+                    "*"
                   ]
                 }
               ]
@@ -129,7 +130,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/collector-api/dev/1518200090406-2018-02-09T18:14:50.406Z/Oversight-Collector-Api.zip"
+          "S3Key": "serverless/collector-api/dev/1518207274074-2018-02-09T20:14:34.074Z/Oversight-Collector-Api.zip"
         },
         "FunctionName": "collector-api-dev-get",
         "Handler": "Oversight.Collector.Api::Oversight.Collector.Api::Get",
@@ -145,7 +146,7 @@
         "Environment": {
           "Variables": {
             "REGISTEREDSERVICE_TABLE": "oversight-registeredservice-dev",
-            "SERVICESTATUS_TABLE": "oversight-registeredservice-dev"
+            "SERVICESTATUS_TABLE": "oversight-servicestatus-dev"
           }
         }
       },
@@ -154,14 +155,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "GetLambdaVersion42xrQVpalRRx6X111k7M4kCjoM6dlndHqS02XDFx22E": {
+    "GetLambdaVersion7lWKYYkRqbbsutry13JKNxcg0CfFxna3e6u7PGtXYY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetLambdaFunction"
         },
-        "CodeSha256": "0cRMjdYw/3wT4yLEQ1GNboNy5udEcHz/3yxmTZkXpp8="
+        "CodeSha256": "ccV11R+nQgf73ZMnPmGicxOH0+HBpyppyS0+1pTp4N0="
       }
     },
     "SaveLambdaFunction": {
@@ -171,7 +172,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/collector-api/dev/1518200090406-2018-02-09T18:14:50.406Z/Oversight-Collector-Api.zip"
+          "S3Key": "serverless/collector-api/dev/1518207274074-2018-02-09T20:14:34.074Z/Oversight-Collector-Api.zip"
         },
         "FunctionName": "collector-api-dev-save",
         "Handler": "Oversight.Collector.Api::Oversight.Collector.Api::Save",
@@ -183,11 +184,11 @@
           ]
         },
         "Runtime": "dotnetcore2.0",
-        "Timeout": 6,
+        "Timeout": 30,
         "Environment": {
           "Variables": {
             "REGISTEREDSERVICE_TABLE": "oversight-registeredservice-dev",
-            "SERVICESTATUS_TABLE": "oversight-registeredservice-dev"
+            "SERVICESTATUS_TABLE": "oversight-servicestatus-dev"
           }
         }
       },
@@ -196,14 +197,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "SaveLambdaVersionZqvSDkWv9VoZ28UQWQ0652iz9jheI8oSjIiCyeHu8Z0": {
+    "SaveLambdaVersion1Mx1snFrLnREBwxfXED9KgXhBffjl3FyoLDxSLZgu10": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveLambdaFunction"
         },
-        "CodeSha256": "0cRMjdYw/3wT4yLEQ1GNboNy5udEcHz/3yxmTZkXpp8="
+        "CodeSha256": "ccV11R+nQgf73ZMnPmGicxOH0+HBpyppyS0+1pTp4N0="
       }
     },
     "ApiGatewayRestApi": {
@@ -334,7 +335,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1518200090515": {
+    "ApiGatewayDeployment1518207274197": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -419,7 +420,7 @@
         "AttributeDefinitions": [
           {
             "AttributeName": "id",
-            "AttributeType": "N"
+            "AttributeType": "S"
           }
         ],
         "KeySchema": [
@@ -441,7 +442,7 @@
         "AttributeDefinitions": [
           {
             "AttributeName": "id",
-            "AttributeType": "N"
+            "AttributeType": "S"
           }
         ],
         "KeySchema": [
@@ -467,13 +468,13 @@
     "GetLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetLambdaVersion42xrQVpalRRx6X111k7M4kCjoM6dlndHqS02XDFx22E"
+        "Ref": "GetLambdaVersion7lWKYYkRqbbsutry13JKNxcg0CfFxna3e6u7PGtXYY"
       }
     },
     "SaveLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveLambdaVersionZqvSDkWv9VoZ28UQWQ0652iz9jheI8oSjIiCyeHu8Z0"
+        "Ref": "SaveLambdaVersion1Mx1snFrLnREBwxfXED9KgXhBffjl3FyoLDxSLZgu10"
       }
     },
     "ServiceEndpoint": {
