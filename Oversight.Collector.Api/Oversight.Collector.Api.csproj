@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>CollectorApi</AssemblyName>
+    <AssemblyName>Oversight.Collector.Api</AssemblyName>
     <OutputType>Library</OutputType>
   </PropertyGroup>
 

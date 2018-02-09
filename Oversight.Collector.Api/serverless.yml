@@ -7,18 +7,18 @@ provider:
   region: us-east-1
 
 package:
-  artifact: bin/release/netcoreapp2.0/publish/Collector-Api.zip
+  artifact: bin/release/netcoreapp2.0/publish/Oversight-Collector-Api.zip
 
 functions:
   get:
-    handler: CollectorApi::CollectorApi.Collector::Get
+    handler: Oversight.Collector.Api::Oversight.Collector.Api::Get
     events:
       - http:
           path: v1/get
           method: GET
           private: false
   save:
-    handler: CollectorApi::CollectorApi.Collector::Save
+    handler: Oversight.Collector.Api::Oversight.Collector.Api::Save
     events:
       - http: 
           path: v1/save

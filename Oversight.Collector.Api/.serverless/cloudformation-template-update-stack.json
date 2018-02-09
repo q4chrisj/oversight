@@ -104,10 +104,10 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/collector-api/dev/1518140843636-2018-02-09T01:47:23.636Z/Collector-Api.zip"
+          "S3Key": "serverless/collector-api/dev/1518148456247-2018-02-09T03:54:16.247Z/Oversight-Collector-Api.zip"
         },
         "FunctionName": "collector-api-dev-get",
-        "Handler": "CollectorApi::CollectorApi.Collector::Get",
+        "Handler": "Oversight.Collector.Api::Oversight.Collector.Api::Get",
         "MemorySize": 1024,
         "Role": {
           "Fn::GetAtt": [
@@ -123,14 +123,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "GetLambdaVersion7qyDQvI5cQb13ErYw979l9IpLu3ZE96j5A5WtU1eHs": {
+    "GetLambdaVersionp8vsM14EGphJcu01dRKIAA6xWUKg5e0rqgP1rsm6A": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetLambdaFunction"
         },
-        "CodeSha256": "FtqKlv6sQQv8gEcuW22AZhhR9SUBvuXoCVNQXAAXqyk="
+        "CodeSha256": "P4GtMw76Qe4mLAibSWKVpTbqDzqafBFHEt+cjW+EYKc="
       }
     },
     "SaveLambdaFunction": {
@@ -140,10 +140,10 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/collector-api/dev/1518140843636-2018-02-09T01:47:23.636Z/Collector-Api.zip"
+          "S3Key": "serverless/collector-api/dev/1518148456247-2018-02-09T03:54:16.247Z/Oversight-Collector-Api.zip"
         },
         "FunctionName": "collector-api-dev-save",
-        "Handler": "CollectorApi::CollectorApi.Collector::Save",
+        "Handler": "Oversight.Collector.Api::Oversight.Collector.Api::Save",
         "MemorySize": 1024,
         "Role": {
           "Fn::GetAtt": [
@@ -159,14 +159,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "SaveLambdaVersiondv63tdh2F1Fe495bBxKuV1vU63CrO8xfsIVwevsI": {
+    "SaveLambdaVersionhokdYOJ4zUOmOufGxBI2rofmOpmrf9aUjNoLzpAnS6c": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveLambdaFunction"
         },
-        "CodeSha256": "FtqKlv6sQQv8gEcuW22AZhhR9SUBvuXoCVNQXAAXqyk="
+        "CodeSha256": "P4GtMw76Qe4mLAibSWKVpTbqDzqafBFHEt+cjW+EYKc="
       }
     },
     "ApiGatewayRestApi": {
@@ -297,7 +297,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1518140843742": {
+    "ApiGatewayDeployment1518148456410": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -386,13 +386,13 @@
     "GetLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetLambdaVersion7qyDQvI5cQb13ErYw979l9IpLu3ZE96j5A5WtU1eHs"
+        "Ref": "GetLambdaVersionp8vsM14EGphJcu01dRKIAA6xWUKg5e0rqgP1rsm6A"
       }
     },
     "SaveLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveLambdaVersiondv63tdh2F1Fe495bBxKuV1vU63CrO8xfsIVwevsI"
+        "Ref": "SaveLambdaVersionhokdYOJ4zUOmOufGxBI2rofmOpmrf9aUjNoLzpAnS6c"
       }
     },
     "ServiceEndpoint": {
