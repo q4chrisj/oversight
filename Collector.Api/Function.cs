@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Amazon.Lambda.APIGatewayEvents;
 using Amazon.Lambda.Core;
 
-[assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
-namespace Collector.Api
+[assembly: LambdaSerializerAttribute(typeof(Amazon.Lambda.Serialization.Json.JsonSerializer))]
+namespace CollectorApi
 {
     public class Collector
     {
@@ -12,12 +14,12 @@ namespace Collector.Api
 
         }
 
-        public APIGatewayProxyResponse GetA(APIGatewayProxyRequest request, ILambdaContext context)
+        public APIGatewayProxyResponse Get(APIGatewayProxyRequest request, ILambdaContext context)
         {
             return new APIGatewayProxyResponse
             {
                 StatusCode = 200,
-                Headers = null,
+                Headers = new Dictionary<string, string>() { {"Context-Type", "text/html"} },
                 Body = "Hi"
             };
         }
@@ -27,7 +29,7 @@ namespace Collector.Api
             return new APIGatewayProxyResponse
             {
                 StatusCode = 200,
-                Headers = null,
+                Headers = new Dictionary<string, string>() { {"Context-Type", "text/html"} },
                 Body = "Hi"
             };
         }

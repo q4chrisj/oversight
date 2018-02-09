@@ -1,13 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>CollectorApi</AssemblyName>
+    <OutputType>Library</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Amazon.Lambda.APIGatewayEvents" Version="1.1.2" />
     <PackageReference Include="Amazon.Lambda.Core" Version="1.0.0" />
     <PackageReference Include="Amazon.Lambda.Serialization.Json" Version="1.1.0" />
+    <PackageReference Include="Amazon.Lambda.Tools" Version="2.1.0" />
+    <PackageReference Include="AWS.Logger.AspNetCore" Version="1.2.5" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <DotNetCliToolReference Include="Amazon.Lambda.Tools" Version="1.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

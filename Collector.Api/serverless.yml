@@ -7,18 +7,18 @@ provider:
   region: us-east-1
 
 package:
-  include: 
+  artifact: bin/release/netcoreapp2.0/publish/Collector-Api.zip
 
 functions:
   get:
-    handler: Collector.Api::Collector.Api.Collector::Get
+    handler: CollectorApi::CollectorApi.Collector::Get
     events:
       - http:
           path: v1/get
           method: GET
           private: false
   save:
-    handler: Collector.Api::Collector.Api.Collector::Save
+    handler: CollectorApi::CollectorApi.Collector::Save
     events:
       - http: 
           path: v1/save

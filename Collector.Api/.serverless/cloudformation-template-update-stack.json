@@ -104,10 +104,10 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/collector-api/dev/1518120942003-2018-02-08T20:15:42.003Z/Collector-Api.zip"
+          "S3Key": "serverless/collector-api/dev/1518140843636-2018-02-09T01:47:23.636Z/Collector-Api.zip"
         },
         "FunctionName": "collector-api-dev-get",
-        "Handler": "Collector.Api::Collector.Api.Collector::Get",
+        "Handler": "CollectorApi::CollectorApi.Collector::Get",
         "MemorySize": 1024,
         "Role": {
           "Fn::GetAtt": [
@@ -123,14 +123,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "GetLambdaVersionWC0ri7C3MZx2ebinsfxF287Ll6zVCeLXV3oQAqstJJY": {
+    "GetLambdaVersion7qyDQvI5cQb13ErYw979l9IpLu3ZE96j5A5WtU1eHs": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetLambdaFunction"
         },
-        "CodeSha256": "CkMerB5dvwetjWHNLmkE5cLgt3WOesLQ/VZdAvcT7GA="
+        "CodeSha256": "FtqKlv6sQQv8gEcuW22AZhhR9SUBvuXoCVNQXAAXqyk="
       }
     },
     "SaveLambdaFunction": {
@@ -140,10 +140,10 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/collector-api/dev/1518120942003-2018-02-08T20:15:42.003Z/Collector-Api.zip"
+          "S3Key": "serverless/collector-api/dev/1518140843636-2018-02-09T01:47:23.636Z/Collector-Api.zip"
         },
         "FunctionName": "collector-api-dev-save",
-        "Handler": "Collector.Api::Collector.Api.Collector::Save",
+        "Handler": "CollectorApi::CollectorApi.Collector::Save",
         "MemorySize": 1024,
         "Role": {
           "Fn::GetAtt": [
@@ -159,14 +159,14 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "SaveLambdaVersionKE7Wpxswq517hTYQrFb8IKOjwqGm5NiZOjElo5hK1zg": {
+    "SaveLambdaVersiondv63tdh2F1Fe495bBxKuV1vU63CrO8xfsIVwevsI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "SaveLambdaFunction"
         },
-        "CodeSha256": "CkMerB5dvwetjWHNLmkE5cLgt3WOesLQ/VZdAvcT7GA="
+        "CodeSha256": "FtqKlv6sQQv8gEcuW22AZhhR9SUBvuXoCVNQXAAXqyk="
       }
     },
     "ApiGatewayRestApi": {
@@ -297,7 +297,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1518120942124": {
+    "ApiGatewayDeployment1518140843742": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -386,13 +386,13 @@
     "GetLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetLambdaVersionWC0ri7C3MZx2ebinsfxF287Ll6zVCeLXV3oQAqstJJY"
+        "Ref": "GetLambdaVersion7qyDQvI5cQb13ErYw979l9IpLu3ZE96j5A5WtU1eHs"
       }
     },
     "SaveLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "SaveLambdaVersionKE7Wpxswq517hTYQrFb8IKOjwqGm5NiZOjElo5hK1zg"
+        "Ref": "SaveLambdaVersiondv63tdh2F1Fe495bBxKuV1vU63CrO8xfsIVwevsI"
       }
     },
     "ServiceEndpoint": {
