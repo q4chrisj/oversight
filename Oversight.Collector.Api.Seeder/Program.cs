@@ -4,20 +4,33 @@ using System.Threading;
 using System.Text;
 using Newtonsoft.Json;
 using Oversight.Collector.Model;
+using Splunk.Logging;
 
 namespace Oversight.Collector.Api.Seeder
 {
     class Program
     {
         private static string _collectorApiEndpoint = "https://tnr2n5s4x3.execute-api.us-east-1.amazonaws.com/dev/";
-        private static string _splunkCollectorEndpoint = "https://http-inputs-q4inc.splunkcloud.com:8088";
+        private static string _splunkCollectorEndpoint = "https://http-inputs-q4inc.splunkcloud.com";
         
         static void Main(string[] args)
         {
             int[] serverIds = new int[] { 10, 12, 14, 15, 16, 17 };
             Random random = new Random();
+            var middleware = new HttpEventCollectorResendMiddleware(100);
+            var sender = new HttpEventCollectorSender(
+                new Uri("https://http-inputs-q4inc.splunkcloud.com/services/collector/event/"),
+                "2550B4EC-5A5F-449F-B6AC-905DCAC57BAD",
+                null,
+                HttpEventCollectorSender.SendMode.Sequential,
+                0,
+                0,
+                0,
+                middleware.Plugin
+                );
+            sender.OnError += o => Console.WriteLine(o.Message);
 
-            for (var i = 0; i < 1; i++)
+            for (var i = 0; i < 10; i++)
             {
                 int randServerId = serverIds[random.Next(serverIds.Length)];
 
@@ -30,21 +43,12 @@ namespace Oversight.Collector.Api.Seeder
                 };
 
                 string req = JsonConvert.SerializeObject(status);
-
-                using (var client = new HttpClient())
-                {
-                    client.BaseAddress = new Uri(_splunkCollectorEndpoint);
-                    client.DefaultRequestHeaders.Add("Authorization", "Splunk B5B4C91E-BC17-4A45-9967-B99E16A1A140");
-
-                    HttpResponseMessage response = client.PostAsync("/services/collector", new StringContent(req, Encoding.Default, "application/json")).Result;
-                    Console.WriteLine(response.StatusCode);
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        Console.WriteLine("There was an error");
-                    }
-                }
+                sender.Send(Guid.NewGuid().ToString(), "INFO", null, req);
+                
                 Thread.Sleep(30000);
             }
+
+            sender.FlushSync();
         }
     }
 }
